@@ -73,4 +73,14 @@ public class ChangeTest {
 			assertThat(ex.getMessage(), is("Coin: 99 not allowed!"));
 		}
 	}
+	
+	@Test
+	public void fiftyPenceChange(){
+		Change cashRegister = new Change(dons);
+		List<Integer> change = cashRegister.pay(101, Arrays.asList(100, 50, 1));
+		assertThat(change.toString(), is("[50]"));
+		
+		change = cashRegister.pay(101, Arrays.asList(100, 50));
+		assertThat(change.toString(), is("[20, 20, 5, 2, 2]"));
+	}
 }
