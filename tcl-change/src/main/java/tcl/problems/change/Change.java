@@ -10,11 +10,13 @@ public class Change {
 
 	List<Integer> dens;
 	
-	public Change(int[] dens){
+	public Change(int[] dens){		
 		this.dens = Arrays.stream(dens).boxed().sorted(Collections.reverseOrder()).collect(Collectors.toList());
+		if (this.dens.get(dens.length-1) < 0)
+			throw new IllegalArgumentException("Denominations cannot be negative: " + this.dens.get(dens.length-1));	
 	}
 	
-	private void checkDenoms(List<Integer> coins){
+	private void checkDenoms(List<Integer> coins){		
 		for (int coin : coins){
 			if (!dens.contains(coin))
 				throw new IllegalArgumentException("Coin: " + coin + " not allowed!");
@@ -22,6 +24,9 @@ public class Change {
 	}
 	
 	public List<Integer> pay(int amount, List<Integer> coins){
+		if (amount<0)
+			throw new IllegalArgumentException("Amount cannot be negative: " + amount);
+		
 		int sum = coins.stream().mapToInt(Integer::intValue).sum();
 		checkDenoms(coins);
 		if (sum<amount)
