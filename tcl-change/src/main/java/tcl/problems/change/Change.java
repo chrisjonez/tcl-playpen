@@ -37,8 +37,7 @@ public class Change {
 			if (changeRequired==0){
 				change.add(currDen);
 				break;
-			}
-			else if (changeRequired<0){
+			}else if (changeRequired<0){
 				changeRequired += currDen;
 				denIndex++;
 			}else{
