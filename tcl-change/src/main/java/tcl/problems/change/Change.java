@@ -23,11 +23,16 @@ public class Change {
 		}
 	}
 	
+	public static int sum(List<Integer> coins){
+		return coins.stream().mapToInt(Integer::intValue).sum();
+		
+	}
+	
 	public List<Integer> pay(int amount, List<Integer> coins){
 		if (amount<0)
 			throw new IllegalArgumentException("Amount cannot be negative: " + amount);
 		
-		int sum = coins.stream().mapToInt(Integer::intValue).sum();
+		int sum = sum(coins);
 		checkDenoms(coins);
 		if (sum<amount)
 			throw new IllegalArgumentException("Not enough!");
